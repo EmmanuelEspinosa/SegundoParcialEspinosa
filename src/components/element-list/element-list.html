@@ -1,0 +1,82 @@
+<div class="page-header">
+  <h1>Parcial de Angular </h1>
+</div>
+
+<div class="search-container">
+  <input type="text" placeholder="Buscar jugador..." [(ngModel)]="filter" />
+</div>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Team</th>
+      <th>Goals</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (player of filterPlayer; track player.id;) {
+    <tr>
+      <td>{{ player.id }}</td>
+      <td>{{ player.name }}</td>
+      <td>{{ player.age }}</td>
+      <td>{{ player.team }}</td>
+      <td>{{ player.goals }}</td>
+      <td>
+        <div class="actionsDiv">
+          <button (click)="showModal(player)">Update</button>
+          <button (click)="deleteElement(player.id)">Delete</button>
+        </div>
+
+    </tr>
+    }
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="1"></td>
+      <td><input type="text" id="name" [(ngModel)]="newPlayer.name" placeholder="Name">
+      </td>
+      <td><input type="number" id="age" [(ngModel)]="newPlayer.age" placeholder="Age">
+      </td>
+      <td><input type="text" id="team" [(ngModel)]="newPlayer.team" placeholder="Team">
+      </td>
+      <td><input type="number" id="goals" [(ngModel)]="newPlayer.goals" placeholder="Goals">
+      </td>
+      <td>
+        <div>
+          <button (click)="savePlayer()">Add Player</button>
+        </div>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+
+<div class="modalEdit" #modalElement>
+  <div class="modalContent">
+    <div class="modalInput">
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="actualPlayer.name">
+    </div>
+    <div class="modalInput">
+      <label for="age">Age:</label>
+      <input type="number" id="age" [(ngModel)]="actualPlayer.age">
+    </div>
+    <div class="modalInput">
+      <label for="team">Team:</label>
+      <input type="text" id="team" [(ngModel)]="actualPlayer.team">
+    </div>
+    <div class="modalInput">
+      <label for="goals">Goals:</label>
+      <input type="number" id="goals" [(ngModel)]="actualPlayer.goals">
+    </div>
+    <div class="modalActions">
+      <button (click)="updateElement()">Guardar</button>
+      <button (click)="closeModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
